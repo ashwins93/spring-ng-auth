@@ -2,16 +2,17 @@ package com.example.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 @SpringBootApplication
-@Controller
+@RestController
 public class DemoApplication {
 
 	@GetMapping("/resource")
@@ -21,6 +22,11 @@ public class DemoApplication {
 		model.put("id", UUID.randomUUID().toString());
 		model.put("content", "Hello World");
 		return model;
+	}
+
+	@GetMapping("/user")
+	public Principal getUser(Principal user) {
+		return user;
 	}
 
 	public static void main(String[] args) {
